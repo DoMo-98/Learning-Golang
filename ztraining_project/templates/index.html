@@ -1,0 +1,16 @@
+<!--index.html-->
+
+<!DOCTYPE html>
+<html>
+    <!--Embed the header.html template at this location-->
+    {{ template "header.html" . }}
+
+    <body class="container">
+        <!--Embed the menu.html template at this location-->
+        {{ template "menu.html" . }}
+        <h1>Hello Gin!</h1>
+    </body>
+
+    <!--Embed the footer.html template at this location-->
+    {{ template "footer.html" . }}
+</html>

@@ -1,15 +1,33 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
 
-// import "net/http" // optional
+	"github.com/gin-gonic/gin"
+)
+
+var router *gin.Engine
 
 func main() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
+	router = gin.Default()
+	router.LoadHTMLGlob("templates/*")
+
+	router.GET("/", func(c *gin.Context) {
+
+		// Call the HTML method of the Context to render a template
+		c.HTML(
+			// Set the HTTP status to 200 (OK)
+			http.StatusOK,
+			// Use the index.html template
+			"index.html",
+			// Pass the data that the page uses (in this case, 'title')
+			gin.H{
+				"title": "Home Page",
+			},
+		)
+
 	})
-	r.Run(":8000") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+
+	// Start serving the application
+	router.Run(":8000") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
